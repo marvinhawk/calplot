@@ -6,9 +6,11 @@ import matplotlib.pyplot as plt
 
 def month_table(ds):
 	full_range = range_generator(ds)
-	rds = ds.reindex(full_range.index)
+	rds = ds.reindex(full_range.index).fillna(value=0)
 	df = pd.DataFrame({"data": rds, "day": rds.index.day, "month": rds.index.month})
 	dfp = df.pivot(index="month", columns="day", values="data")
+	sns.set()
+	sns.set_style("whitegrid")
 	calplot(dfp)
 
 def week_table(ds):
@@ -16,6 +18,7 @@ def week_table(ds):
 	rds = ds.reindex(full_range.index)
 	df = pd.DataFrame({"data": rds, "day": rds.index.weekday, "week": rds.index.week})
 	dfp = df.pivot(index="week", columns="day", values="data")
+	sns.set()
 	calplot(dfp)
 
 def range_generator(ds):
@@ -23,6 +26,5 @@ def range_generator(ds):
 	return full_range
 
 def calplot(df):
-	sns.set()
 	ax = sns.heatmap(df, cmap="Greens", linewidth=.5, square=True)
 	plt.show()
