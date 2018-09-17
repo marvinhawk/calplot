@@ -1,4 +1,5 @@
 import datetime
+# import numpy as np
 import pandas as pd
 from pandas.tseries.offsets import MonthBegin, MonthEnd
 import seaborn as sns
@@ -26,5 +27,10 @@ def range_generator(ds):
 	return full_range
 
 def calplot(df):
-	ax = sns.heatmap(df, cmap="Greens", linewidth=.5, square=True)
+	base_color = "#eaeaf2"
+	shading = int(df.max().max())
+	colors = sns.color_palette("OrRd", n_colors=shading)
+	colors[0] = base_color
+
+	ax = sns.heatmap(df, cmap=colors, linewidth=.5, square=True)
 	plt.show()
