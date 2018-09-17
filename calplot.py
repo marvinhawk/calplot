@@ -1,5 +1,4 @@
 import datetime
-# import numpy as np
 import pandas as pd
 from pandas.tseries.offsets import MonthBegin, MonthEnd
 import seaborn as sns
